@@ -1,5 +1,5 @@
 <?php
-$this->load->view('includes/header');
+$this->load->view('authentication/header');
 ?>
 <div id="main_content">
     <?php
@@ -9,5 +9,5 @@ $this->load->view('includes/header');
 
 
 <?php
-$this->load->view('includes/footer');
+$this->load->view('authentication/footer');
 ?>
