@@ -11,6 +11,9 @@ $this->load->view('authentication/header');
     <?php echo form_input('firstname', set_value('firstname', '')); ?>
     <label>Last Name</label>
     <?php echo form_input('lastname', set_value('lastname', '')); ?>
+    <label>Email:</label>
+    <?php echo form_input('email', set_value('email', 'yourmail@gmail.com'));
+    ?>
     <label>Select your bank name</label>
     <select name="bank_id">
 
@@ -21,15 +24,12 @@ $this->load->view('authentication/header');
         }
         ?>
     </select>
-    
+
     <label>Register as</label>
-    <?php
-    $options = array(
-        'm' => 'Moderator',
-        'a' => 'Admin'
-    );
-    echo form_dropdown('type', $options);
-    ?>    
+    <select name="type">
+        <option value="m">Moderator</option>
+        <option value="a">Admin</option>
+    </select>
 
 
 </fieldset>
@@ -37,7 +37,7 @@ $this->load->view('authentication/header');
 <fieldset>
     <legend>Login info</legend>
     <label>User Name</label>
-<?php echo form_input('username', set_value('username', '')); ?>
+    <?php echo form_input('username', set_value('username', '')); ?>
     <label>Password</label>
     <?php echo form_password('password', set_value('password', '')); ?>
     <label>Confirm Password</label>
@@ -51,6 +51,6 @@ $this->load->view('authentication/header');
     echo validation_errors('<p class="error">');
     ?>
 </fieldset>
-    <?php
-    $this->load->view('authentication/footer');
-    ?>
+<?php
+$this->load->view('authentication/footer');
+?>

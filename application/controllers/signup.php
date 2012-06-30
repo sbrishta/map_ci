@@ -15,9 +15,10 @@ class Signup extends CI_Controller {
 
         $this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
-//        $this->form_validation->set_rules('email_address', 'Email Address', 'trim|required|valid_email');
-        $this->form_validation->set_rules('bank_id', 'Bank Name', 'required');
-        $this->form_validation->set_rules('bank_id', 'Bank Name', 'required');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
+       
+        $this->form_validation->set_rules('bank_id', 'Bank Name', 'trim|required');
+        $this->form_validation->set_rules('type', 'Type', 'required');
         $this->form_validation->set_rules('username', 'User Name', 'trim|required|min_length[4]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('password2', 'Confirm Password', 'trim|required|matches[password]');
