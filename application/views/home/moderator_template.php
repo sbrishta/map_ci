@@ -1,5 +1,5 @@
 <?php
-$this->load->view('home/header_admin');
+$this->load->view('home/header_moderator');
 ?>
 <div id="main_content">
     <?php

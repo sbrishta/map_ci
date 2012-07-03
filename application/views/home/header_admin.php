@@ -12,5 +12,10 @@
         echo form_close();
         ?>		
     </div>
+
+    <?php
+    echo anchor('bank_admin/add_moderator', 'Add an account');
+    ?>
+
 </head>
 <body>

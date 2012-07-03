@@ -2,39 +2,55 @@
 
 class Signup extends CI_Controller {
 
+    function is_logged() {
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        if (!isset($is_logged_in) || $is_logged_in != true)
+            return false;
+        else
+            return true;
+    }
+
+    function is_admin() {
+        if ($this->is_logged() == true) {
+            $sess_type = $this->session->userdata('type');
+            if ($sess_type == 'a') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     function index() {
-        $this->load->model('bank_info_model');
-        $data['rows'] = $this->bank_info_model->getAll();
-        $this->load->view('authentication/signup_form', $data);
+        if ($this->is_admin() == TRUE) {
+            $data['main_content'] = 'home/add_account_form';
+            $this->load->view('home/home_template', $data);
+        }
+        else
+            $this->load->view('invalid_member');
     }
 
     function create_member() {
-        $this->load->library('form_validation');
 
-        //field name, error message,validation rules
+        if ($this->is_admin() == TRUE) {
 
-        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
-        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
-       
-        $this->form_validation->set_rules('bank_id', 'Bank Name', 'trim|required');
-        $this->form_validation->set_rules('type', 'Type', 'required');
-        $this->form_validation->set_rules('username', 'User Name', 'trim|required|min_length[4]');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
-        $this->form_validation->set_rules('password2', 'Confirm Password', 'trim|required|matches[password]');
+            $this->load->library('form_validation');
 
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->index();
-        } else {
-            $this->load->model('temp_member_model');
-            if ($query = $this->temp_member_model->create_member()) {
-                $data['main_content'] = 'signup_success';
-                $this->load->view('authentication/template', $data);
-            } else {
+            if ($this->form_validation->run('register') == FALSE) {
                 $this->index();
+            } else {
+                $this->load->model('membership_model');
+                if ($query = $this->membership_model->create_member()) {
+                    $data['main_content'] = 'home/signup_success';
+                    $this->load->view('home/home_template', $data);
+                } else {
+                    $this->index();
+                }
             }
         }
+        else
+            $this->load->view('invalid_member');
     }
 
 }

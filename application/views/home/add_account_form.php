@@ -1,6 +1,3 @@
-<?php
-$this->load->view('authentication/header');
-?>
 <h1>Create an account</h1>
 <fieldset>
     <legend>Personal Information</legend>  
@@ -36,6 +33,3 @@ $this->load->view('authentication/header');
     echo validation_errors('<p class="error">');
     ?>
 </fieldset>
-<?php
-$this->load->view('authentication/footer');
-?>
