@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 29, 2012 at 01:47 PM
+-- Generation Time: Jul 03, 2012 at 07:25 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -18,31 +18,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `map_db`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin_table`
---
-
-CREATE TABLE IF NOT EXISTS `admin_table` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `type` char(1) NOT NULL,
-  `bank_id` int(11) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  PRIMARY KEY (`admin_id`),
-  KEY `bank_id` (`bank_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `admin_table`
---
-
-INSERT INTO `admin_table` (`admin_id`, `firstname`, `lastname`, `username`, `type`, `bank_id`, `password`) VALUES
-(1, 'site', 'admin', 'site_admin', 's', 1, '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
@@ -98,44 +73,25 @@ INSERT INTO `bank_info` (`bank_id`, `bank_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `member` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(25) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `type` char(1) NOT NULL,
   `bank_id` int(11) NOT NULL,
   `password` varchar(32) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`admin_id`),
+  KEY `bank_id` (`bank_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `member`
 --
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `temp_member`
---
-
-CREATE TABLE IF NOT EXISTS `temp_member` (
-  `temp_id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) DEFAULT NULL,
-  `lastname` varchar(255) DEFAULT NULL,
-  `username` varchar(25) NOT NULL,
-  `bank_id` int(11) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  PRIMARY KEY (`temp_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `temp_member`
---
-
-INSERT INTO `temp_member` (`temp_id`, `firstname`, `lastname`, `username`, `bank_id`, `password`) VALUES
-(3, 'shabnam', 'basera', 'rishta', 1, 'b411e17dde88bb00590aa7f831fbe5d0');
+INSERT INTO `member` (`admin_id`, `username`, `email`, `type`, `bank_id`, `password`) VALUES
+(1, 'site_admin', NULL, 's', 1, '81dc9bdb52d04dc20036dbd8313ed055'),
+(2, 'rahim', 'you@gmail.com', 'a', 3, '81dc9bdb52d04dc20036dbd8313ed055'),
+(3, 'karim', 'you@gmail.com', 'a', 1, '2167a6ac80340b69f3b05b800417d6c7'),
+(5, 'maddy', 'yourmail@gmail.com', 'm', 1, '66db6f4bfafbe4a0175bd34ab3f26566');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
