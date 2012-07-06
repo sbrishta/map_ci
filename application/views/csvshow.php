@@ -1,6 +1,4 @@
-<?php
-$this->load->view('home/header');
-?>
+
 
 <?php foreach ($file_data as $row): ?>
     <fieldset>
