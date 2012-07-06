@@ -3,15 +3,28 @@ body {
     margin:0;
     padding: 0;
     font-family: arial;
+    
 }
 #upload{
     width: 300px;
     background: #f0f0f0 url(../img/login_bg.jpg) repeat-x 0 0;
     border: 1px solid white;
-    margin: 20px auto;
+    /*margin: 20px auto;*/
     padding: 10px;
-    -moz-border-radius: 3px; 
+    -moz-border-radius: 3px;
+    float: left;
 }
+.menuWrapper{ 
+    width: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+    
+}
+.menu{width: 100px; float: left;}
+            .menu ul{ width:100%; overflow:hidden;}
+            .menu ul li{ float: left; list-style: none;}
+            .menu ul li a{ float: left; line-height: 24px; color:#FBE6F2;}
+            .menu ul li input{ float: left; line-height: 24px; color:black;}
 #login_form,#contact_form {
     width: 300px;
     background: #f0f0f0 url(../img/login_bg.jpg) repeat-x 0 0;

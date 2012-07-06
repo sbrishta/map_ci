@@ -53,9 +53,8 @@ CREATE TABLE IF NOT EXISTS `bank_info` (
   `bank_id` int(11) NOT NULL AUTO_INCREMENT,
   `bank_name` varchar(255) NOT NULL,
   PRIMARY KEY (`bank_id`),
-  UNIQUE KEY `bank_name` (`bank_name`),
-  UNIQUE KEY `bank_name_2` (`bank_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  UNIQUE KEY `bank_name` (`bank_name`)
+ ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `bank_info`

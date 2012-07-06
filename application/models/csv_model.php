@@ -57,7 +57,9 @@ class Csv_model extends CI_Model {
             $file_info = $this->upload->data();
             $csvfilepath = "csv/" . $file_info['file_name'];
             $this->addfromcsv($csvfilepath);
-            return true;
+            $filename=$file_info['file_name'];
+           // print_r($filename);
+            return $filename;
         }
         //echo var_dump($csvfilepath);
 //        //return $csvfilepath;
