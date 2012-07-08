@@ -19,7 +19,7 @@
         </select><br/>
         <label>Map</label>
         <?php
-        $addStr['add'] = $row['address'] . $row['area_name'] . "bangladesh";
+        $addStr['add'] = $row['address'] .$row['area_name'] . "bangladesh";
         $this->load->view('newExp2', $addStr);
 
         echo form_submit('submit', 'Save');

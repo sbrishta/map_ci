@@ -1,10 +1,5 @@
 <?php
-
 class Csv_ci extends CI_Controller {
-    /* function __construct() {
-      parent::__construct();
-      $this->is_logged_in();
-      } */
 
     function is_logged() {
         $is_logged_in = $this->session->userdata('is_logged_in');
@@ -20,10 +15,11 @@ class Csv_ci extends CI_Controller {
 
             if ($this->input->post('upload')) {
                 $name = $this->Csv_model->do_upload();
-                //print_r($name);
+              
+              
                 if (isset($name)) {
-                    $filePath = "localhost/map_ci/csv/" . $name;
-                    //$filePath = './csv/bank_data.csv';
+                    $filePath = './csv/'.$name;
+
                     $row = 1;
                     if (($handle = fopen($filePath, "r")) !== FALSE) {
                         while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
@@ -38,12 +34,15 @@ class Csv_ci extends CI_Controller {
 
                         fclose($handle);
                     }
-                    $this->load->view('csvshow', array('file_data' => $file_data));
+                   // $this->load->view('csvshow', array('file_data' => $file_data));
+                
+                    $this->load->view('csv_view', array('file_data' => $file_data));
                 }
             }
         }
+        else $this->load->view('invalid_member');
     }
-
+}
 //function csv_load() {
 //        $this->load->model('csv_model');
 //        //$filePath=$filepath;
@@ -94,5 +93,4 @@ class Csv_ci extends CI_Controller {
 //            //$this->load->view('login_form');
 //        }
 //    }
-//
-}
+//}

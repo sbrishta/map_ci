@@ -32,8 +32,8 @@ class Bank_admin extends CI_Controller {
 
     function add_moderator() {
         if ($this->is_admin() == TRUE) {
-            $this->load->model('bank_info_model');
-            $data['rows'] = $this->bank_info_model->getAll();
+           // $this->load->model('bank_info_model');
+           // $data['rows'] = $this->bank_info_model->getAll();
             $data['main_content'] = 'home/add_account_form';
             $this->load->view('home/home_template', $data);
         }

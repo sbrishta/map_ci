@@ -1,67 +1,67 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <!titleGoogle Maps JavaScript API v3 Example: Places Autocomplete</title>
-    
-
+    <head>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
         <script type="text/javascript">
 
 
-        var PostCodeid = "#Postcode";
-        var longval = "#hidLong";
+            var PostCodeid = "#Postcode";
+            var longval = "#hidLong";
 
-        var latval = "#hidLat";
-        var geocoder;
-        var map;
-        var marker;
+            var latval = "#hidLat";
+            var geocoder;
+            var map;
+            var marker;
 
-        function initialize() {
-            //MAP
-            var initialLat = $(latval).val();
-            var initialLong = $(longval).val();
-            if (initialLat == '') {
-                initialLat = "23.716211";
-                initialLong = "90.408154";
-            }
-            var latlng = new google.maps.LatLng(initialLat, initialLong);
-            var options = {
-                zoom: 16,
-                center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
+            function initialize() {
+                //MAP
+                var initialLat = $(latval).val();
+                var initialLong = $(longval).val();
+                if (initialLat == '') {
+                    initialLat = "23.716211";
+                    initialLong = "90.408154";
+                }
+                var latlng = new google.maps.LatLng(initialLat, initialLong);
+                var options = {
+                    zoom: 16,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
 
-            map = new google.maps.Map(document.getElementById("geomap"), options);
+                map = new google.maps.Map(document.getElementById("geomap"), options);
 
 
-            geocoder = new google.maps.Geocoder();
+                geocoder = new google.maps.Geocoder();
 
-            marker = new google.maps.Marker({
-                map: map,
-                draggable: true,
-                position: latlng
-            });
-
-            google.maps.event.addListener(marker, "dragend", function (event) {
-                var point = marker.getPosition();
-                map.panTo(point);
-            });
-
-            <?php echo 'var myPhpVariable = "'. $add . '";'; ?>
-                 geocoder.geocode({ 'address': myPhpVariable }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        map.setCenter(results[0].geometry.location);
-                        marker.setPosition(results[0].geometry.location);
-                        $(latval).val(marker.getPosition().lat());
-                        $(longval).val(marker.getPosition().lng());
-                        $(PostCodeid).val(myPhpVariable);
-                    } else {
-                        alert("Geocode was not successful for the following reason: " + status);
-                    }
+                marker = new google.maps.Marker({
+                    map: map,
+                    draggable: true,
+                    position: latlng
                 });
+
+                google.maps.event.addListener(marker, "dragend", function (event) {
+                    var point = marker.getPosition();
+                    map.panTo(point);
+                });
+            
+            
+                
+                
+<?php echo 'var myPhpVariable = "' . $row1['add'] . '";'; ?>
+            geocoder.geocode({ 'address': myPhpVariable }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    marker.setPosition(results[0].geometry.location);
+                    $(latval).val(marker.getPosition().lat());
+                    $(longval).val(marker.getPosition().lng());
+                    $(PostCodeid).val(myPhpVariable);
+                } else {
+                    alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
 
         };
 
@@ -86,7 +86,7 @@
             });
 
             $('#findbutton').click(function (e) {
-                   var address = $(PostCodeid).val();
+                var address = $(PostCodeid).val();
                 geocoder.geocode({ 'address': address }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         map.setCenter(results[0].geometry.location);
@@ -108,9 +108,9 @@
                             $(latval).val(marker.getPosition().lat());
                             $(longval).val(marker.getPosition().lng());
 
-                         //   var title = marker.getTitle();
-                       //     <?php echo 'var myTitle = marker.getTitle();'; ?>
-                       //     $(PostCodeid).val(myTitle));
+                            //   var title = marker.getTitle();
+                            //     <?php echo 'var myTitle = marker.getTitle();'; ?>
+                            //     $(PostCodeid).val(myTitle));
                         }
 
                     }
@@ -119,10 +119,14 @@
 
         });
 
-    </script>
-  </head>
-  <body>
-  <style type="" >
+        </script>
+
+    </head>
+    <body>
+
+
+
+        <style type="" >
             .ui-autocomplete {
                 background-color: white;
                 width: 300px;
@@ -132,23 +136,41 @@
             }
             .ui-menu-item {padding:3px 0;}
         </style>
+        <fieldset>
+            <legend>Each location INFO</legend>  
+            <?php echo form_open('mainhome/'); ?> 
 
-        <form method="post" accept-charset="utf-8" action="http://localhost/ci/index.php/map/" />
+            <label for="bank_name">Bank Name </label><?php echo form_input('bank_name', set_value('bank_name', $row1['bank_name'])); ?>
+            <label for="area_name">Area Name </label><?php echo form_input('area_name', set_value('area_name', $row1['area_name'])); ?>
+            <label for="address">Address </label><?php
+            echo form_input('address', set_value('address', $row1['address']));
+            //echo var_dump($bank);
+            ?>
+            <label for="type">Select type</label>
+            <select name="type">
+                <option>ATM booth</option>
+                <option>Branch office</option>
+                <option>Head office</option>
 
-        <p><input class="postcode" id="Postcode" name="Postcode" type="text" size="50"> <input type="submit" id="findbutton" value="Find" /></p>
-
-        <div id="geomap" style="width:400px; height:400px;">
-            <p>Loading Please Wait...</p>
-        </div>
-
-        <input id="hidLat" name="hidLat" type="text" value="">
-        <input id="hidLong" name="hidLong" type="text" value="">
-        
-        <p><input type="submit" id="savebutton" value="Save longitude & lattitude" /></p>
-
-      <!--  <?php echo "$add";?>
-      -->
+            </select><br/>
 
 
-  </body>
+            <label>Map</label>
+            <div id="geomap" style="width:700px; height:400px; left:300px;">
+                <p>Loading Please Wait...</p>
+            </div>
+
+
+
+            <input type="hidden" name="hidLat" value="" id="hidLat" />
+            <input type="hidden" name="hidLong" value="" id="hidLong" />
+            <?php
+            echo form_submit('submit', 'Save', 'id=""');
+            echo form_close();
+            ?>
+        </fieldset>
+
+
+
+    </body>
 </html>
