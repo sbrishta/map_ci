@@ -6,6 +6,7 @@ class Admin_approve extends CI_Controller{
         $this->load->library('table');
         $data['rows']=$this->temp_member_model->getAll();
        // echo $this->table->generate($data);
+        /////
         $this->load->view('admin_home');
     }
 }
